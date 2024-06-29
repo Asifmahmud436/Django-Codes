@@ -1,0 +1,5 @@
+python -m venv room3
+room3\Scripts\activate.bat
+pip install django==5.0.6
+django-admin startproject simple_page_navigation
+cd simple_page_navigation
