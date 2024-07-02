@@ -1,5 +1,28 @@
-python -m venv room3
-room3\Scripts\activate.bat
+python -m venv room_name
+
+room_name\Scripts\activate.bat
+
 pip install django==5.0.6
-django-admin startproject simple_page_navigation
-cd simple_page_navigation
+
+django-admin startproject project_Name
+
+cd project_Name
+
+django-admin startapp app_Name
+
+pip install crispy-bootstrap5
+
+in settings.py ->installed_apps-> 'first_app','crispy_forms','crispy_bootstrap',
+
+in templates-> 'templates'
+
+in settings ->
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+py manage.py runserver
+
+{% load crispy_forms_tags %} in django_forms.html
+
+{{ form | crispy }} in django_forms.html
+
