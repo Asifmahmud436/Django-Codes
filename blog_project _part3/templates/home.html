@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap p-3 align-items-center">
+  <div class='col-6'>
+    <h1>Welcome to Zettexs' Blog</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum varius ante ac rutrum. Nullam vitae felis ligula. Mauris vel nibh dapibus, mattis augue quis, pharetra tortor. Vestibulum sit amet ligula dignissim, maximus odio quis, fringilla massa. Sed vel nunc sit amet nulla convallis accumsan. Cras quis est non purus varius euismod. Suspendisse urna nibh, porta vel elementum et, tincidunt ac libero.
+
+      Praesent ultrices tempus magna eget fringilla. Mauris dapibus eros orci, eu malesuada diam tempor et. Suspendisse vestibulum, elit eu luctus condimentum, arcu augue luctus lectus, euismod imperdiet dui nisi et nisi. Mauris in porta nulla, quis malesuada risus. Nulla justo urna, volutpat sed tellus ac, lacinia feugiat diam. Praesent nec consequat purus, a blandit est. Donec ac nunc lacus. Sed bibendum molestie justo, ut aliquam erat rutrum consequat. Nullam tincidunt turpis ex, vel vestibulum libero vehicula quis. Nam vitae mollis lacus. Curabitur molestie consectetur condimentum. Sed faucibus ante in volutpat lobortis. Praesent tristique semper velit, vel tristique nibh maximus a. Nam laoreet ac neque nec tincidunt. Nullam at viverra dolor. Donec massa odio, ornare id nunc ut, pretium malesuada nunc.</p>
+  </div>
+  <div class='col-6'>
+    <img src="{% static 'p1.avif'%}" />
+  </div> 
+</div>
+
+<div class='d-flex flex-wrap'>
+  <div class='col-2 bg-white p-3'>
+    <h3>All categories</h3>
+    {% for cat in category%}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name='category' id='{{cat.id}}'/>
+      <label class="form-check-label" for='{{cat.id}}'>
+      <a href='{% url "category_wise_post" cat.slug %}' class='text-decoration-none text-dark'>{{cat.name}}</a>
+      </label>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class='col-10 p-3'>
+  <h4>{{data | length}} results found</h4>
+  <div class="d-flex flex-wrap p-5 m-2">
+    {% for post in data %}
+    <div class="col-sm-3 m-2">
+      <img src='{{post.image.url}}' class='card-img-top' alt='...'/>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><a href='{% url "detail_post" post.id %}'>{{post.title}}</a></h5>
+          <p class="card-text">{{post.content | truncatewords:10}}</p>
+          <p>Author :  {{post.author.first_name}} </p>
+          <p>Category :  
+          {% for cat in post.category.all %}
+          <btn class='btn btn-primary btn-sm m-2'>{{cat.name}}</btn> 
+          {% endfor %} 
+        
+            </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}
